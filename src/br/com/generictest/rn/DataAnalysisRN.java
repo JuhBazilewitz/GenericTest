@@ -3,6 +3,7 @@ package br.com.generictest.rn;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import br.com.generictest.model.CustomerData;
@@ -87,5 +88,18 @@ public class DataAnalysisRN {
 		String customerStr = "Quantidade de clientes: " + customer.size();
 		String salesmanStr = "Quantidade de vendedores: " + saleman.size();
 		
+	}
+	
+	public SalesData mostExpesiveSale(List<SalesData> listSales) {
+		int[] price = null;
+		int i = 0;
+		for(SalesData data : listSales) {
+			for(Itens item : data.getItens()) {
+				
+			}
+		}
+		
+		
+		return null;
 	}
 }
