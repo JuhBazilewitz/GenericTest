@@ -4,7 +4,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import br.com.generictest.model.CustomerData;
 import br.com.generictest.model.Itens;
@@ -39,7 +42,9 @@ public class DataAnalysisRN {
 			} else if(temp.contains(SALES_DATA)) {
 				salesList.add(readSales(temp, salemanList));
 			}
-		} 
+		}
+		
+		writeData(customerList, salemanList, salesList);
 	}
 	
 	public SalesmanData readSalesman(String temp) {
@@ -82,24 +87,41 @@ public class DataAnalysisRN {
 		return sales;
 	}
 	
-	public void writeData(List<CustomerData> customer, List<SalesmanData> saleman) {
+	public void writeData(List<CustomerData> customer, List<SalesmanData> saleman, List<SalesData> salesList) {
 	// Quantidade de clientes no arquivo - Amount of clients in the input file
 		
 		String customerStr = "Quantidade de clientes: " + customer.size();
 		String salesmanStr = "Quantidade de vendedores: " + saleman.size();
 		
+		mostExpesiveSale(salesList);
 	}
 	
 	public SalesData mostExpesiveSale(List<SalesData> listSales) {
-		int[] price = null;
+		int price = 0;
 		int i = 0;
+		Map<String, Integer> object = new HashMap<>(); 
 		for(SalesData data : listSales) {
 			for(Itens item : data.getItens()) {
-				
+				int aux = Integer.parseInt(item.getPrice());
+				price += aux;
 			}
+			object.put(data.getSalesId(), price);
 		}
+		
 		
 		
 		return null;
 	}
 }
+
+
+//Map<String, Integer> concurrentMap = new ConcurrentHashMap<String, Integer>(object);
+//String maxKey = concurrentMap.keySet().iterator().next();
+//Integer max = object.get(maxKey);
+//
+//for(String key : concurrentMap.keySet()){
+//    Integer currValue = concurrentMap.get(key);
+//    if(max >= currValue){
+//    	object.values().stream().findAny().of(currValue.toString());
+//    }
+//}
